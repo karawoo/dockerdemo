@@ -25,6 +25,20 @@ docker run -p 3838:3838 penguins
 
 You can then view the running shiny app at http://localhost:3838/. 
 
+## Getting output from the container
+
+You might want to generate some output in the Docker container (i.e. a report)
+and access it from your machine. One way to do this is by using [bind
+mounts](https://docs.docker.com/storage/bind-mounts/). I've added another
+Dockerfile that creates a PDF report. Use the commands below to build the image
+and run the report, which will be stored in the `output` directory.
+
+```
+docker build -t penguinsreport --file Dockerfile.report .
+mkdir output
+docker run --mount type=bind,source=${PWD}/output,target=/output penguinsreport
+```
+
 ## A note about reproducibility
 
 For maximum reproducibility, you should make sure to install specific versions
