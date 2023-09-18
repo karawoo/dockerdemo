@@ -1,2 +1,4 @@
 .DS_Store
 .Rhistory
+quarto/report.html
+quarto/report_files/*

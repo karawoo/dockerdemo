@@ -1,8 +1,0 @@
-FROM rocker/shiny-verse:4.2.0
-
-RUN Rscript -e "install.packages('palmerpenguins', repos = 'https://packagemanager.rstudio.com/cran/__linux__/focal/2022-08-16')"
-RUN Rscript -e "tinytex::install_tinytex()"
-
-COPY report.Rmd /myproject/report.Rmd
-
-CMD ["Rscript", "-e", "rmarkdown::render('/myproject/report.Rmd', output_dir = 'output')"]

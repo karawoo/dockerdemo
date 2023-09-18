@@ -23,10 +23,12 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
+  penguin_data <- reactive({
+    penguins[penguins$species %in% input$species, ]
+  })
 
   output$penguin_plot <- renderPlot({
-    dat <- penguins[penguins$species %in% input$species, ]
-    ggplot(data = dat, aes(x = flipper_length_mm, y = body_mass_g)) +
+    ggplot(data = penguin_data(), aes(x = flipper_length_mm, y = body_mass_g)) +
       geom_point(aes(color = species), size = 3) +
       scale_color_manual(values = c("Gentoo" = "darkorange", "Adelie" = "darkorchid", "Chinstrap" = "cyan4")) +
       xlim(c(170, 240)) +
